@@ -25,9 +25,18 @@ jobs:
         comparison-method: contains
         timeout: 10
         max-score: 100
+    - name: Hello World Test2
+      id: hello-world-test2
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Hello World Test2
+        setup-command: ''
+        command: "./test.sh"
+        timeout: 10
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
       env:
         HELLO-WORLD-TEST_RESULTS: "${{steps.hello-world-test.outputs.result}}"
+        HELLO-WORLD-TEST2_RESULTS: "${{steps.hello-world-test2.outputs.result}}"
       with:
-        runners: hello-world-test
+        runners: hello-world-test,hello-world-test2
